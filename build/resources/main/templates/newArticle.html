@@ -2,33 +2,240 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>블로그 글</title>
+  <title>변화의 새벽, 미라클 모닝</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <style>
+    .main-section {
+      background-color: beige;
+      padding: 50px;
+      text-align: center;
+    }
+
+    .main-section h1 {
+      margin-bottom: 10px;
+    }
+
+    .main-section h4 {
+      margin-bottom: 10px;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .article-card {
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .article-section input,
+    .article-section textarea {
+      margin-bottom: 10px;
+      background-repeat: repeat;
+      padding: 10px;
+    }
+
+    .countdown-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 5px;
+      background-color: #FAEBD7;
+    }
+
+    .countdown-section .countdown-timer {
+      font-size: 34px;
+      font-weight: bold;
+      margin: 0 auto;
+    }
+
+    .countdown-section .countdown-buttons button {
+      margin-right: 5px;
+      background-color: #8B0000;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .main-section {
+        padding: 20px;
+      }
+
+      .article-section input,
+      .article-section textarea {
+        margin-bottom: 5px;
+      }
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .col-lg-8 {
+      max-width: 800px;
+    }
+
+    .btn-section {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-<div class="p-5 mb-5 text-center</> bg-light">
-  <h1 class="mb-3">My Blog</h1>
-  <h4 class="mb-3">블로그에 오신 것을 환영합니다.</h4>
+<div class="main-section">
+  <h1>미라클 모닝</h1>
+  <h4>인생의 변화는 새벽녘에 이루어진다.</h4>
 </div>
 
-<div class="container mt-5">
+<div class="container">
   <div class="row">
     <div class="col-lg-8">
-      <article>
-        <input type="hidden" id="article-id" th:value="${article.id}">
+      <div class="article-card">
+        <article class="article-section">
+          <input type="hidden" id="article-id" th:value="${article.id}">
 
-        <header class="mb-4">
-          <input type="text" class="form-control" placeholder="제목" id="title" th:value="${article.title}">
-        </header>
-        <section class="mb-5">
-          <textarea class="form-control h-25" rows="10" placeholder="내용" id="content" th:text="${article.content}"></textarea>
-        </section>
+          <header class="mb-4">
+            <input type="text" class="form-control" placeholder="미라클모닝 00회차" id="title" th:value="${article.title}">
+          </header>
+          <section class="mb-5">
+            <textarea class="form-control h-25" rows="10" placeholder="ex)&#10;한일(00:00~00:00)&#10;1. 독서(00분)&#10;2. 블로그 포스팅(00분)" id="content" th:text="${article.content}"></textarea>
+          </section>
+          <div class="countdown-section">
+            <div class="countdown-timer">
+              <span id="countdown-hours">00</span>:
+              <span id="countdown-minutes">00</span>:
+              <span id="countdown-seconds">00</span>
+            </div>
+            <div class="countdown-buttons">
+              <button type="button" id="set-time-btn" class="btn btn-secondary btn-sm">시간설정</button>
+              <button type="button" id="start-btn" class="btn btn-secondary btn-sm">시작</button>
+              <button type="button" id="pause-btn" class="btn btn-secondary btn-sm">일시정지</button>
+              <button type="button" id="stop-btn" class="btn btn-secondary btn-sm">중지</button>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="btn-section">
         <button th:if="${article.id} != null" type="button" id="modify-btn" class="btn btn-primary btn-sm">수정</button>
         <button th:if="${article.id} == null" type="button" id="create-btn" class="btn btn-primary btn-sm">등록</button>
-      </article>
+        <button type="button" class="btn btn-secondary btn-sm ml-2"
+                onclick="location.href='/articles'">돌아가기</button>
+      </div>
     </div>
   </div>
 </div>
 
-<script src="/js/article.js"></script>
+<!--<script>-->
+<!--  // 타이머 상태-->
+<!--  const TimerState = {-->
+<!--    STOPPED: "stopped",-->
+<!--    RUNNING: "running",-->
+<!--    PAUSED: "paused",-->
+<!--  };-->
+
+<!--  // 카운트다운 타이머 객체-->
+<!--  let countdownTimer = null;-->
+<!--  let timerState = TimerState.STOPPED;-->
+<!--  let remainingTime = 0;-->
+
+<!--  // DOM 요소 가져오기-->
+<!--  const hoursElement = document.getElementById("countdown-hours");-->
+<!--  const minutesElement = document.getElementById("countdown-minutes");-->
+<!--  const secondsElement = document.getElementById("countdown-seconds");-->
+<!--  const setTimeButton = document.getElementById("set-time-btn");-->
+<!--  const startButton = document.getElementById("start-btn");-->
+<!--  const pauseButton = document.getElementById("pause-btn");-->
+<!--  const stopButton = document.getElementById("stop-btn");-->
+<!--  const resetButton = document.getElementById("reset-btn");-->
+
+<!--  // 이벤트 리스너 등록-->
+<!--  setTimeButton.addEventListener("click", setTime);-->
+<!--  startButton.addEventListener("click", startTimer);-->
+<!--  pauseButton.addEventListener("click", pauseTimer);-->
+<!--  stopButton.addEventListener("click", stopTimer);-->
+<!--  resetButton.addEventListener("click", resetTimer);-->
+
+<!--  // 시간 설정-->
+<!--  function setTime() {-->
+<!--    const hours = parseInt(prompt("시간을 입력하세요 (0~23)"));-->
+<!--    const minutes = parseInt(prompt("분을 입력하세요 (0~59)"));-->
+
+<!--    if (isNaN(hours) || isNaN(minutes) || hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {-->
+<!--      alert("올바른 시간을 입력하세요.");-->
+<!--      return;-->
+<!--    }-->
+
+<!--    remainingTime = (hours * 60 * 60) + (minutes * 60);-->
+<!--    updateCountdownDisplay();-->
+<!--  }-->
+
+<!--  // 타이머 시작-->
+<!--  function startTimer() {-->
+<!--    if (timerState === TimerState.RUNNING) {-->
+<!--      return;-->
+<!--    }-->
+
+<!--    if (remainingTime <= 0) {-->
+<!--      alert("타이머 시간을 설정하세요.");-->
+<!--      return;-->
+<!--    }-->
+
+<!--    countdownTimer = setInterval(updateTimer, 1000);-->
+<!--    timerState = TimerState.RUNNING;-->
+<!--  }-->
+
+<!--  // 타이머 일시정지-->
+<!--  function pauseTimer() {-->
+<!--    if (timerState !== TimerState.RUNNING) {-->
+<!--      return;-->
+<!--    }-->
+
+<!--    clearInterval(countdownTimer);-->
+<!--    timerState = TimerState.PAUSED;-->
+<!--  }-->
+
+<!--  // 타이머 중지-->
+<!--  function stopTimer() {-->
+<!--    clearInterval(countdownTimer);-->
+<!--    remainingTime = 0;-->
+<!--    timerState = TimerState.STOPPED;-->
+<!--    updateCountdownDisplay();-->
+<!--  }-->
+
+<!--  // 타이머 업데이트-->
+<!--  function updateTimer() {-->
+<!--    remainingTime&#45;&#45;;-->
+
+<!--    if (remainingTime <= 0) {-->
+<!--      clearInterval(countdownTimer);-->
+<!--      timerState = TimerState.STOPPED;-->
+<!--      alert("타이머가 종료되었습니다.");-->
+<!--    }-->
+
+<!--    updateCountdownDisplay();-->
+<!--  }-->
+
+<!--  // 카운트다운 디스플레이 업데이트-->
+<!--  function updateCountdownDisplay() {-->
+<!--    const hours = Math.floor(remainingTime / 3600);-->
+<!--    const minutes = Math.floor((remainingTime % 3600) / 60);-->
+<!--    const seconds = remainingTime % 60;-->
+
+<!--    hoursElement.textContent = padZero(hours);-->
+<!--    minutesElement.textContent = padZero(minutes);-->
+<!--    secondsElement.textContent = padZero(seconds);-->
+<!--  }-->
+
+<!--  // 숫자가 10보다 작을 경우 앞에 0을 붙여 반환-->
+<!--  function padZero(num) {-->
+<!--    return num.toString().padStart(2, "0");-->
+<!--  }-->
+<!--</script>-->
 </body>
+</html>

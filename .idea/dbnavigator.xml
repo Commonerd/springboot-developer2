@@ -13,77 +13,39 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="d2c92b5d-1b28-4c00-9b8f-d0c8f7a4307c">
-      <console name="Connection" type="STANDARD" schema="mysql" session="Main"><![CDATA[create database blog;
-use blog;
+      <console name="Connection" type="STANDARD" schema="mysql" session="Main"><![CDATA[SELECT * FROM ARTICLE
 
-create table article(
-    id bigint not null AUTO_INCREMENT,
-    author varchar(255) not null,
-    content varchar(255) not null,
-    created_at timestamp,
-    title varchar(255) not null,
-    updated_at timestamp,
-    primary key (id)
 
-);
 
-create table refresh_token (
-    id bigint not null AUTO_INCREMENT,
-    refresh_token varchar(255) not null,
-    user_id bigint not null,
-    primary key (id)
-);
 
-create table users (
-    id bigint not null AUTO_INCREMENT,
-    created_at timestamp,
-    email varchar(255) not null,
-    nickname varchar(255),
-    password varchar(255),
-    updated_at timestamp,
-    primary key (id)
-);]]></console>
-    </connection>
-    <connection id="cc8bcc1a-91a9-4940-a003-3aa1b9e3c93a">
-      <console name="Connection 1" type="STANDARD" schema="mysql" session="Main"><![CDATA[create database blog;
-use blog;
-
-create table article(
-    id bigint not null AUTO_INCREMENT,
-    author varchar(255) not null,
-    content varchar(255) not null,
-    created_at timestamp,
-    title varchar(255) not null,
-    updated_at timestamp,
-    primary key (id)
-);
-
-create table refresh_token (
-    id bigint not null AUTO_INCREMENT,
-    refresh_token varchar(255) not null,
-    user_id bigint not null,
-    primary key (id)
-);
-
-create table users (
-    id bigint not null AUTO_INCREMENT,
-    created_at timestamp,
-    email varchar(255) not null,
-    nickname varchar(255),
-    password varchar(255),
-    updated_at timestamp,
-    primary key (id)
-);]]></console>
+;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="d2c92b5d-1b28-4c00-9b8f-d0c8f7a4307c" object-ref="schemas/blog/tables/article" />
+    </open-files>
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="d2c92b5d-1b28-4c00-9b8f-d0c8f7a4307c" dataset="blog.article" active-filter-id="3613caf8-e073-476e-b08e-28fb588825d3">
+      <filter id="3613caf8-e073-476e-b08e-28fb588825d3" name="4" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="=" value="4" active="true" />
+      </filter>
+    </filter-actions>
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.MethodExecutionManager">
+    <method-browser />
+    <execution-history>
+      <group-entries value="true" />
+      <execution-inputs />
+    </execution-history>
+    <argument-values-cache />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
@@ -94,92 +56,6 @@ create table users (
       <connection id="d2c92b5d-1b28-4c00-9b8f-d0c8f7a4307c" active="true" signed="true">
         <database>
           <name value="Connection" />
-          <description value="" />
-          <database-type value="MYSQL" />
-          <config-type value="BASIC" />
-          <database-version value="8.0" />
-          <driver-source value="BUNDLED" />
-          <driver-library value="" />
-          <driver value="" />
-          <url-type value="DATABASE" />
-          <host value="awseb-e-cp9cfpim3e-stack-awsebrdsdatabase-k2awojhfif5u.cxuayzqeqm6d.ap-northeast-2.rds.amazonaws.com" />
-          <port value="3306" />
-          <database value="mysql" />
-          <tns-folder value="" />
-          <tns-profile value="" />
-          <type value="USER_PASSWORD" />
-          <user value="root" />
-          <deprecated-pwd value="MXEydzNlMXEydzNlUTFxMnczZTFxMnczZVE=" />
-        </database>
-        <properties>
-          <auto-commit value="false" />
-        </properties>
-        <ssh-settings>
-          <active value="false" />
-          <proxy-host value="" />
-          <proxy-port value="22" />
-          <proxy-user value="" />
-          <deprecated-proxy-pwd value="" />
-          <auth-type value="PASSWORD" />
-          <key-file value="" />
-          <key-passphrase value="" />
-        </ssh-settings>
-        <ssl-settings>
-          <active value="false" />
-          <certificate-authority-file value="" />
-          <client-certificate-file value="" />
-          <client-key-file value="" />
-        </ssl-settings>
-        <details>
-          <charset value="UTF-8" />
-          <session-management value="true" />
-          <ddl-file-binding value="true" />
-          <database-logging value="true" />
-          <connect-automatically value="true" />
-          <restore-workspace value="true" />
-          <restore-workspace-deep value="false" />
-          <environment-type value="default" />
-          <connectivity-timeout value="30" />
-          <idle-time-to-disconnect value="30" />
-          <idle-time-to-disconnect-pool value="5" />
-          <credential-expiry-time value="10" />
-          <max-connection-pool-size value="7" />
-          <alternative-statement-delimiter value="" />
-        </details>
-        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
-          <object-type-filter>
-            <object-type name="SCHEMA" enabled="true" />
-            <object-type name="USER" enabled="true" />
-            <object-type name="ROLE" enabled="true" />
-            <object-type name="PRIVILEGE" enabled="true" />
-            <object-type name="CHARSET" enabled="true" />
-            <object-type name="TABLE" enabled="true" />
-            <object-type name="VIEW" enabled="true" />
-            <object-type name="MATERIALIZED_VIEW" enabled="true" />
-            <object-type name="NESTED_TABLE" enabled="true" />
-            <object-type name="COLUMN" enabled="true" />
-            <object-type name="INDEX" enabled="true" />
-            <object-type name="CONSTRAINT" enabled="true" />
-            <object-type name="DATASET_TRIGGER" enabled="true" />
-            <object-type name="DATABASE_TRIGGER" enabled="true" />
-            <object-type name="SYNONYM" enabled="true" />
-            <object-type name="SEQUENCE" enabled="true" />
-            <object-type name="PROCEDURE" enabled="true" />
-            <object-type name="FUNCTION" enabled="true" />
-            <object-type name="PACKAGE" enabled="true" />
-            <object-type name="TYPE" enabled="true" />
-            <object-type name="TYPE_ATTRIBUTE" enabled="true" />
-            <object-type name="ARGUMENT" enabled="true" />
-            <object-type name="DIMENSION" enabled="true" />
-            <object-type name="CLUSTER" enabled="true" />
-            <object-type name="DBLINK" enabled="true" />
-          </object-type-filter>
-          <object-name-filters />
-        </object-filters>
-      </connection>
-      <connection id="cc8bcc1a-91a9-4940-a003-3aa1b9e3c93a" active="true" signed="true">
-        <database>
-          <name value="Connection 1" />
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="BASIC" />
