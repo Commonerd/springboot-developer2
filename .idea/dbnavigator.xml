@@ -25,9 +25,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="d2c92b5d-1b28-4c00-9b8f-d0c8f7a4307c" object-ref="schemas/blog/tables/article" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="d2c92b5d-1b28-4c00-9b8f-d0c8f7a4307c" dataset="blog.article" active-filter-id="3613caf8-e073-476e-b08e-28fb588825d3">

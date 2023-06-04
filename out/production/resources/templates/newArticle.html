@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>변화의 새벽, 미라클 모닝</title>
@@ -68,6 +69,10 @@
       .article-section textarea {
         margin-bottom: 5px;
       }
+
+      .col-lg-8 {
+        max-width: 100%;
+      }
     }
 
     .row {
@@ -87,6 +92,7 @@
     }
   </style>
 </head>
+
 <body>
 <div class="main-section">
   <h1>미라클 모닝</h1>
@@ -101,10 +107,13 @@
           <input type="hidden" id="article-id" th:value="${article.id}">
 
           <header class="mb-4">
-            <input type="text" class="form-control" placeholder="미라클모닝 00회차" id="title" th:value="${article.title}">
+            <input type="text" class="form-control" placeholder="미라클모닝 00회차" id="title"
+                   th:value="${article.title}">
           </header>
           <section class="mb-5">
-            <textarea class="form-control h-25" rows="10" placeholder="ex)&#10;한일(00:00~00:00)&#10;1. 독서(00분)&#10;2. 블로그 포스팅(00분)" id="content" th:text="${article.content}"></textarea>
+              <textarea class="form-control h-25" rows="10"
+                        placeholder="ex)&#10;한일(00:00~00:00)&#10;1. 독서(00분)&#10;2. 블로그 포스팅(00분)" id="content"
+                        th:text="${article.content}"></textarea>
           </section>
           <div class="countdown-section">
             <div class="countdown-timer">
@@ -124,8 +133,7 @@
       <div class="btn-section">
         <button th:if="${article.id} != null" type="button" id="modify-btn" class="btn btn-primary btn-sm">수정</button>
         <button th:if="${article.id} == null" type="button" id="create-btn" class="btn btn-primary btn-sm">등록</button>
-        <button type="button" class="btn btn-secondary btn-sm ml-2"
-                onclick="location.href='/articles'">돌아가기</button>
+        <button type="button" class="btn btn-secondary btn-sm ml-2" onclick="location.href='/articles'">돌아가기</button>
       </div>
     </div>
   </div>
@@ -134,4 +142,5 @@
 <script src="/js/article.js"></script>
 <script src="/js/timer.js"></script>
 </body>
+
 </html>

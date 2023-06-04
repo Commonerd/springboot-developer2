@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>변화의 새벽, 미라클 모닝</title>
@@ -64,10 +65,11 @@
     }
 
     .col-lg-8 {
-      max-width: 800px;
+      max-width: 100%;
     }
   </style>
 </head>
+
 <body>
 <div class="main-section">
   <h1>미라클 모닝</h1>
@@ -92,13 +94,9 @@
           </section>
         </div>
         <div class="btn-section">
-          <button type="button" id="modify-btn"
-                  th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|"
-                  class="btn btn-primary btn-sm">수정</button>
-          <button type="button" id="delete-btn"
-                  class="btn btn-secondary btn-sm">삭제</button>
-          <button type="button" class="btn btn-secondary btn-sm"
-                  onclick="location.href='/articles'">돌아가기</button>
+          <button type="button" id="modify-btn" th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|" class="btn btn-primary btn-sm">수정</button>
+          <button type="button" id="delete-btn" class="btn btn-secondary btn-sm">삭제</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/articles'">돌아가기</button>
         </div>
       </article>
     </div>
@@ -107,4 +105,5 @@
 
 <script src="/js/article.js"></script>
 </body>
+
 </html>

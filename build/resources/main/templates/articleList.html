@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>변화의 새벽, 미라클 모닝</title>
@@ -63,6 +64,7 @@
     }
   </style>
 </head>
+
 <body>
 <div class="main-section">
   <h1>미라클 모닝</h1>
@@ -76,8 +78,7 @@
     </div>
     <button type="button" id="create-btn" th:onclick="|location.href='@{/new-article}'|"
             class="btn btn-secondary">글 등록</button>
-    <button type="button" class="btn btn-secondary"
-            onclick="location.href='/logout'">로그아웃</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='/logout'">로그아웃</button>
   </div>
   <div class="row">
     <div class="col-md-6" th:each="item : ${articles}">
@@ -95,21 +96,7 @@
   </div>
 </div>
 
-<script>
-  function getCurrentTime() {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = ("0" + (now.getMonth() + 1)).slice(-2);
-    var day = ("0" + now.getDate()).slice(-2);
-    var dayOfWeek = ['일', '월', '화', '수', '목', '금', '토'][now.getDay()];
-    var hour = ("0" + now.getHours()).slice(-2);
-    var minute = ("0" + now.getMinutes()).slice(-2);
-    var second = ("0" + now.getSeconds()).slice(-2);
-    var currentTime = year + "년 " + month + "월 " + day + "일 " + dayOfWeek + "요일 " + hour + "시 " + minute + "분 " + second + "초";
-    document.getElementById("current-time").textContent = currentTime;
-  }
-
-  setInterval(getCurrentTime, 500);
-</script>
+<script src="/js/nowtime.js"></script>
 </body>
+
 </html>
