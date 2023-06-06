@@ -8,6 +8,7 @@ import me.commonerd.springbootdeveloper.dto.UpdateArticleRequest;
 import me.commonerd.springbootdeveloper.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -37,6 +38,9 @@ public class BlogApiController {
         return ResponseEntity.ok()
                 .body(articles);
     }
+
+
+
     @GetMapping("/api/articles/{id}")
     public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id) {
         Article article = blogService.findById(id);

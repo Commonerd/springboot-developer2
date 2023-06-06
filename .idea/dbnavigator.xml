@@ -33,6 +33,11 @@
         <condition column="id" operator="=" value="4" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="d2c92b5d-1b28-4c00-9b8f-d0c8f7a4307c" dataset="blog.users" active-filter-id="ef87c5e5-c0a3-4b57-a017-ae192e4aee2c">
+      <filter id="ef87c5e5-c0a3-4b57-a017-ae192e4aee2c" name="user1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="=" value="user1" active="true" />
+      </filter>
+    </filter-actions>
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />

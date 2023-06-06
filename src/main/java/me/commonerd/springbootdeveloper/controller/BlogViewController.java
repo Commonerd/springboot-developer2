@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -29,6 +30,34 @@ public class BlogViewController {
 
         return "articleList";
     }
+
+    // 2023.06.05. by commonerd : 제목으로 검색기능 추가, index-100
+/*    //>>>>> 100
+    @GetMapping("/search-articles")
+    public String getArticlesBySearch(@RequestParam(name = "title", required = false) String title,
+                                      *//*@RequestParam(name = "content", required = false) String content,*//*
+                                      Model model) {
+        List<ArticleListViewResponse> articles = blogService.findSearch(
+                        title != null ? title : ""
+                        *//*content != null ? content : ""*//*
+                )
+                .stream()
+                .map(ArticleListViewResponse::new)
+                .toList();
+        model.addAttribute("articles", articles);
+        return "articleListSearch";
+    }
+    //<<<<< 100*/
+
+    //2023.06.06.by commonerd : 작성자,제목,내용 검색기능 추가, index-100
+    //>>>>> 100
+    @GetMapping("/search-articles")
+    public String searchArticles(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+        List<ArticleListViewResponse> articles = blogService.searchArticles(keyword);
+        model.addAttribute("articles", articles);
+        return "articleListSearch";
+    }
+    //<<<<< 100
 
     @GetMapping("/articles/{id}")
     public String getArticle(@PathVariable Long id, Model model) {

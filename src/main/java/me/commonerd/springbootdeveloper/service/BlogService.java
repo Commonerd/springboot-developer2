@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import me.commonerd.springbootdeveloper.domain.Article;
 import me.commonerd.springbootdeveloper.dto.AddArticleRequest;
+import me.commonerd.springbootdeveloper.dto.ArticleListViewResponse;
 import me.commonerd.springbootdeveloper.dto.UpdateArticleRequest;
 import me.commonerd.springbootdeveloper.repository.BlogRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +25,17 @@ public class BlogService {
     public List<Article> findAll() {
         return blogRepository.findAll();
     }
+
+    /*public List<Article> findSearch(String title) {
+        return blogRepository.findByTitleContaining(title);
+    }*/
+
+    //2023.06.06.by commonerd : 작성자,제목,내용 검색기능 추가, index-100
+    //>>>>> 100
+    public List<ArticleListViewResponse> searchArticles(String keyword) {
+        return blogRepository.searchArticles(keyword);
+    }
+    //<<<<< 100
 
     public Article findById(long id) {
         return blogRepository.findById(id)
