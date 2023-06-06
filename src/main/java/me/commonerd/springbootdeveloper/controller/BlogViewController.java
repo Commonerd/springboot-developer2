@@ -5,6 +5,7 @@ import me.commonerd.springbootdeveloper.domain.Article;
 import me.commonerd.springbootdeveloper.dto.ArticleListViewResponse;
 import me.commonerd.springbootdeveloper.dto.ArticleViewResponse;
 import me.commonerd.springbootdeveloper.service.BlogService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 @Controller
@@ -20,7 +24,7 @@ public class BlogViewController {
 
     private final BlogService blogService;
 
-    @GetMapping("/articles")
+   /*@GetMapping("/articles")
     public String getArticles(Model model) {
         List<ArticleListViewResponse> articles = blogService.findAll()
                 .stream()
@@ -29,7 +33,17 @@ public class BlogViewController {
         model.addAttribute("articles", articles);
 
         return "articleList";
+    }*/
+
+    @GetMapping("/articles")
+    public String getArticles(@RequestParam(defaultValue = "0") int page, Model model) {
+        Page<ArticleListViewResponse> pagedArticles = blogService.findPaginated(page, 9)
+                .map(ArticleListViewResponse::new);
+        model.addAttribute("pagedArticles", pagedArticles);
+
+        return "articleList";
     }
+
 
     // 2023.06.05. by commonerd : 제목으로 검색기능 추가, index-100
 /*    //>>>>> 100
@@ -52,9 +66,10 @@ public class BlogViewController {
     //2023.06.06.by commonerd : 작성자,제목,내용 검색기능 추가, index-100
     //>>>>> 100
     @GetMapping("/search-articles")
-    public String searchArticles(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
-        List<ArticleListViewResponse> articles = blogService.searchArticles(keyword);
-        model.addAttribute("articles", articles);
+    public String searchArticles(@RequestParam(name = "keyword", required = false) String keyword,
+                                 Model model) {
+        List<ArticleListViewResponse> pagedArticles = blogService.searchArticles(keyword);
+        model.addAttribute("pagedArticles", pagedArticles);
         return "articleListSearch";
     }
     //<<<<< 100

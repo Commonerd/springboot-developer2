@@ -7,10 +7,15 @@ import me.commonerd.springbootdeveloper.dto.AddArticleRequest;
 import me.commonerd.springbootdeveloper.dto.ArticleListViewResponse;
 import me.commonerd.springbootdeveloper.dto.UpdateArticleRequest;
 import me.commonerd.springbootdeveloper.repository.BlogRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -26,6 +31,12 @@ public class BlogService {
         return blogRepository.findAll();
     }
 
+    public Page<Article> findPaginated(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        return blogRepository.findAll(pageable);
+    }
+
+
     /*public List<Article> findSearch(String title) {
         return blogRepository.findByTitleContaining(title);
     }*/
@@ -33,9 +44,11 @@ public class BlogService {
     //2023.06.06.by commonerd : 작성자,제목,내용 검색기능 추가, index-100
     //>>>>> 100
     public List<ArticleListViewResponse> searchArticles(String keyword) {
+        //Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         return blogRepository.searchArticles(keyword);
     }
     //<<<<< 100
+
 
     public Article findById(long id) {
         return blogRepository.findById(id)

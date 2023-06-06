@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>변화의 새벽, 미라클 모닝</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <style>
+    .container {
+      padding: 15px;
+    }
+
+    .main-section {
+      background-color: beige;
+      padding: 50px;
+      text-align: center;
+    }
+
+    .main-section h1 {
+      margin-bottom: 10px;
+    }
+
+    .main-section h4 {
+      margin-bottom: 10px;
+    }
+
+    .btn-section {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .btn-section .btn {
+      margin-left: 5px;
+    }
+
+    .card {
+      margin-bottom: 10px;
+    }
+
+    .time-section {
+      margin-bottom: 10px;
+      margin-right: auto;
+      font-size: 24px;
+      color: #888;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .search-results {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .search-results .col-md-6 {
+      margin-bottom: 10px;
+    }
+
+    .search-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 576px) {
+      .main-section {
+        padding: 20px;
+      }
+
+      .btn-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn-section .btn {
+        margin-top: 5px;
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="main-section">
+  <h1>미라클 모닝</h1>
+  <h4>인생의 변화는 새벽녘에 이루어진다.</h4>
+</div>
+
+
+<div class="container">
+  <div class="btn-section">
+    <div class="time-section">
+      <span id="current-time"></span>
+    </div>
+    <button type="button" id="create-btn" th:onclick="|location.href='@{/new-article}'|"
+            class="btn btn-secondary">글 등록</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='/logout'">로그아웃</button>
+  </div>
+  <div class="search-title">
+    <h2>검색 결과</h2>
+  </div>
+  <div class="search-results">
+    <div class="col-md-6" th:each="item : ${articles}">
+      <div class="card">
+        <div class="card-header" th:text="${item.id}"></div>
+        <div class="card-body">
+          <h5 class="card-title" th:text="${item.title}"></h5>
+          <hr>
+          <p class="text-muted fst-italic mt-1 ml-1" th:text="|Posted on ${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm')} By ${item.author}|"></p>
+          <hr>
+          <a th:href="@{/articles/{id}(id=${item.id})}" class="btn btn-primary">보러가기</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="/js/nowtime.js"></script>
+</body>
+
+</html>

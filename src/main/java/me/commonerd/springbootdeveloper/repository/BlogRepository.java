@@ -1,7 +1,10 @@
 package me.commonerd.springbootdeveloper.repository;
 
+import jakarta.persistence.TypedQuery;
 import me.commonerd.springbootdeveloper.domain.Article;
 import me.commonerd.springbootdeveloper.dto.ArticleListViewResponse;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,5 +22,6 @@ public interface BlogRepository extends JpaRepository<Article, Long> {
             "OR (a.content LIKE %:keyword%)")
     List<ArticleListViewResponse> searchArticles(@Param("keyword") String keyword); // @Param 추가해야 빈 생성됨
     //<<<<< 100
+
 
 }

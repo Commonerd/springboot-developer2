@@ -47,6 +47,14 @@
       text-align: left;
     }
 
+    .search-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+
     @media (max-width: 576px) {
       .main-section {
         padding: 20px;
@@ -69,6 +77,17 @@
 <div class="main-section">
   <h1>미라클 모닝</h1>
   <h4>인생의 변화는 새벽녘에 이루어진다.</h4>
+  <!-- 2023.06.05. by commonerd : 검색기능 추가 , index 100 -->
+  <div class="search-section" style="padding: 40px; margin-bottom: 15px; border-radius: 10px;">
+    <form action="/search-articles" method="get" style="display: flex; align-items: center; margit-top:50px">
+      <input type="text" id="keyword" name="keyword"
+             style="margin-right: 10px; flex-grow: 1; min-width: 600px; padding: 5px; border-radius: 15px;"
+            placeholder="검색어를 입력하세요.">
+      <button type="submit" class="btn btn-dark" style="padding: 5px 15px; margin-left: 5px;">검색</button>
+    </form>
+  </div>
+  </div>
+  <!-- index 100 -->
 </div>
 
 <div class="container">
@@ -81,13 +100,16 @@
     <button type="button" class="btn btn-secondary" onclick="location.href='/logout'">로그아웃</button>
   </div>
   <div class="row">
-    <div class="col-md-6" th:each="item : ${articles}">
+    <div class="col-md-4" th:each="item : ${articles}">
       <div class="card">
         <div class="card-header" th:text="${item.id}"></div>
         <div class="card-body">
           <h5 class="card-title" th:text="${item.title}"></h5>
           <hr>
-          <p class="card-text" th:text="${item.content}"></p>
+          <!--<p class="card-text" th:text="${item.content}"></p>-->
+          <p class="text-muted fst-italic mt-1 ml-1"
+             th:text="|Posted on ${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm')}
+             By ${item.author}|"></p>
           <hr>
           <a th:href="@{/articles/{id}(id=${item.id})}" class="btn btn-primary">보러가기</a>
         </div>
@@ -95,6 +117,43 @@
     </div>
   </div>
 </div>
+
+<!-- 페이지네이션 -->
+<!-- 페이지네이션 -->
+<div class="row">
+  <div class="col-md-12">
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${currentPage == 1 ? 'disabled' : ''}">
+          <a class="page-link" th:href="@{/articles?page=1}" aria-label="First">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item" th:classappend="${currentPage == 1 ? 'disabled' : ''}">
+          <a class="page-link" th:href="@{|/articles?page=${currentPage - 1}|}" aria-label="Previous">
+            <span aria-hidden="true">&lsaquo;</span>
+          </a>
+        </li>
+        <li class="page-item" th:classappend="${page == currentPage ? 'active' : ''}" th:each="page : ${pages}">
+          <a class="page-link" th:href="@{|/articles?page=${page}|}" th:text="${page}"></a>
+        </li>
+        <li class="page-item" th:classappend="${currentPage == totalPages ? 'disabled' : ''}">
+          <a class="page-link" th:href="@{|/articles?page=${currentPage + 1}|}" aria-label="Next">
+            <span aria-hidden="true">&rsaquo;</span>
+          </a>
+        </li>
+        <li class="page-item" th:classappend="${currentPage == totalPages ? 'disabled' : ''}">
+          <a class="page-link" th:href="@{|/articles?page=${totalPages}|}" aria-label="Last">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+</div>
+
+
 
 <script src="/js/nowtime.js"></script>
 </body>
