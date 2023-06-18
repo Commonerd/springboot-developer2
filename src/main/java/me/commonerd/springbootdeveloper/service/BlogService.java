@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -49,6 +48,9 @@ public class BlogService {
     }
     //<<<<< 100
 
+    public List<Object[]> findArticleRanking() {
+        return blogRepository.findTop5Ranking();
+    }
 
     public Article findById(long id) {
         return blogRepository.findById(id)
@@ -81,5 +83,8 @@ public class BlogService {
             throw new IllegalArgumentException("not authorized");
         }
     }
+
+
+
 
 }

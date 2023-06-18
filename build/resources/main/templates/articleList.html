@@ -70,6 +70,23 @@
         margin-left: 0;
       }
     }
+    .ranking-section {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #f8f9fa;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .ranking-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .ranking-section li {
+            margin-bottom: 5px;
+        }
   </style>
 </head>
 
@@ -81,7 +98,8 @@
   <div class="search-section" style="padding: 40px; margin-bottom: 15px; border-radius: 10px;">
     <form action="/search-articles" method="get" style="display: flex; align-items: center; margit-top:50px">
       <input type="text" id="keyword" name="keyword"
-             style="margin-right: 10px; flex-grow: 1; min-width: 600px; padding: 5px; border-radius: 15px;"
+             style="margin-right: 10px; flex-grow: 1; min-width: 600px;
+             padding: 5px; border-radius: 15px; text-align: center;"
             placeholder="검색어를 입력하세요.">
       <button type="submit" class="btn btn-dark" style="padding: 5px 15px; margin-left: 5px;">검색</button>
     </form>
@@ -90,72 +108,92 @@
   <!-- index 100 -->
 </div>
 
+<!-- 랭킹 섹션 추가 -->
+<div class="topPublishers-section">
+  <h4>게시자 랭킹 TOP 5</h4>
+  <ul id="topPublishers">
+    <!-- 랭킹이 자동으로 추가될 위치 -->
+  </ul>
+</div>
+
+
 <div class="container">
   <div class="btn-section">
     <div class="time-section">
       <span id="current-time"></span>
     </div>
     <button type="button" id="create-btn" th:onclick="|location.href='@{/new-article}'|"
-            class="btn btn-secondary">글 등록</button>
-    <button type="button" class="btn btn-secondary" onclick="location.href='/logout'">로그아웃</button>
+            class="btn btn-primary mr-1">글 등록</button>
+    <button type="button" class="btn btn-primary ml-1" onclick="location.href='/logout'">로그아웃</button>
   </div>
   <div class="row">
-    <div class="col-md-4" th:each="item : ${articles}">
+    <div class="col-md-4" th:each="item : ${pagedArticles}">
+    <!--<div class="col-md-4" th:each="item : ${articles}">-->
       <div class="card">
-        <div class="card-header" th:text="${item.id}"></div>
+        <div class="card-header" th:text="|№.${item.id}|"></div>
         <div class="card-body">
           <h5 class="card-title" th:text="${item.title}"></h5>
           <hr>
           <!--<p class="card-text" th:text="${item.content}"></p>-->
-          <p class="text-muted fst-italic mt-1 ml-1"
-             th:text="|Posted on ${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm')}
-             By ${item.author}|"></p>
+          <p class="text-muted first-italic" th:text="|${#temporals.format(item.createdAt,'yyyy-MM-dd HH:mm')}|"></p>
+          <p class="text-muted first-italic" th:text="|${item.author}|"></p>
           <hr>
-          <a th:href="@{/articles/{id}(id=${item.id})}" class="btn btn-primary">보러가기</a>
+          <a th:href="@{/articles/{id}(id=${item.id})}" class="btn btn-dark">보러가기</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- 페이지네이션 부분을 추가합니다 -->
 
-<!-- 페이지네이션 -->
-<!-- 페이지네이션 -->
-<div class="row">
-  <div class="col-md-12">
-    <nav aria-label="Page navigation">
-      <ul class="pagination justify-content-center">
-        <li class="page-item" th:classappend="${currentPage == 1 ? 'disabled' : ''}">
-          <a class="page-link" th:href="@{/articles?page=1}" aria-label="First">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item" th:classappend="${currentPage == 1 ? 'disabled' : ''}">
-          <a class="page-link" th:href="@{|/articles?page=${currentPage - 1}|}" aria-label="Previous">
-            <span aria-hidden="true">&lsaquo;</span>
-          </a>
-        </li>
-        <li class="page-item" th:classappend="${page == currentPage ? 'active' : ''}" th:each="page : ${pages}">
-          <a class="page-link" th:href="@{|/articles?page=${page}|}" th:text="${page}"></a>
-        </li>
-        <li class="page-item" th:classappend="${currentPage == totalPages ? 'disabled' : ''}">
-          <a class="page-link" th:href="@{|/articles?page=${currentPage + 1}|}" aria-label="Next">
-            <span aria-hidden="true">&rsaquo;</span>
-          </a>
-        </li>
-        <li class="page-item" th:classappend="${currentPage == totalPages ? 'disabled' : ''}">
-          <a class="page-link" th:href="@{|/articles?page=${totalPages}|}" aria-label="Last">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+<div class="paging section">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" th:class="${pagedArticles.first ? 'disabled': ''}">
+      <a class="page-link" th:href="@{/articles?page=1}">처음</a>
+    </li>
+    <!-- 현재 페이지가 첫 페이지인 경우 '이전' 탭을 표시하지 않습니다 -->
+    <li class="page-item" th:class="${pagedArticles.first ? 'disabled': ''}"
+        th:unless="${pagedArticles.first}">
+      <a class="page-link" th:href="@{|/articles?page=${pagedArticles.number - 1}|}">이전</a>
+    </li>
+    <!-- 현재 페이지와 현재 페이지의 이전/다음 두 페이지를 표시합니다 -->
+    <th:block th:if="${pagedArticles.number >= 3}">
+      <li class="page-item">
+        <a class="page-link" th:text="${pagedArticles.number - 2}" th:href="@{|/articles?page=${pagedArticles.number - 2}|}"></a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" th:text="${pagedArticles.number - 1}" th:href="@{|/articles?page=${pagedArticles.number - 1}|}"></a>
+      </li>
+    </th:block>
+    <li class="page-item active">
+      <a class="page-link" th:text="${pagedArticles.number}"></a>
+    </li>
+    <th:block th:if="${pagedArticles.number <= pagedArticles.totalPages - 2}">
+      <li class="page-item">
+        <a class="page-link" th:text="${pagedArticles.number + 1}" th:href="@{|/articles?page=${pagedArticles.number + 1}|}"></a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" th:text="${pagedArticles.number + 2}" th:href="@{|/articles?page=${pagedArticles.number + 2}|}"></a>
+      </li>
+    </th:block>
+    <!-- 현재 페이지가 마지막 페이지인 경우 '다음' 탭을 표시하지 않습니다 -->
+    <li class="page-item" th:class="${pagedArticles.last ? 'disabled': ''}"
+        th:unless="${pagedArticles.last}">
+      <a class="page-link" th:href="@{|/articles?page=${pagedArticles.number + 1}|}">다음</a>
+    </li>
+    <li class="page-item" th:class="${pagedArticles.last ? 'disabled': ''}">
+      <a class="page-link" th:href="@{|/articles?page=${pagedArticles.totalPages}|}">마지막</a>
+    </li>
+  </ul>
 </div>
+
+
 </div>
 
 
 
 <script src="/js/nowtime.js"></script>
+<script src="/js/ranking.js"></script>
 </body>
 
 </html>

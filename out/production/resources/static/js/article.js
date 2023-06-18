@@ -127,3 +127,31 @@ function httpRequest(method, url, body, success, fail) {
         }
     });
 }
+
+
+window.onload = function() {
+      getRankings();
+    };
+
+    function getRankings() {
+    debugger;
+      // 랭킹을 가져오기 위해 Ajax 요청 보내기
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/rankings");
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          // 화면에 랭킹 표시하기
+          var data = xhr.responseText;
+          data = data.replace(/<[^>]*>/g, "");
+          for (var i = 0; i < data.length; i++) {
+            var ranking = data[i];
+            var li = document.createElement("li");
+            li.innerHTML = `${ranking.author} : ${ranking.score}`;
+            $("#ranking-list").append(li);
+          }
+        } else {
+          console.log("Error: " + xhr.status);
+        }
+      };
+      xhr.send();
+    }
