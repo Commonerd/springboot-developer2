@@ -21,6 +21,25 @@ spring:
             scope:
               - email
               - profile
+    # 2023.06.21. by commonerd 스마트에디터 적용시 Spring Security가 X-Frame-Options Click jacking 공격을 막음
+    #                                   이를 SAMEORIGIN을 이용해 풀기
+    filter:
+      chain:
+        filters:
+          # 기존의 필터 설정을 작성
+
+          - class: org.springframework.security.web.header.HeaderWriterFilter
+            order: 5
+            args:
+              # 이 부분부터 추가된 코드
+              headerWriter:
+                class: org.springframework.security.web.header.writers.StaticHeadersWriter
+                constructor-args:
+                  headers:
+                    - "X-Frame-Options: SAMEORIGIN"
+              # 여기까지 추가된 코드
+
+          # 기존의 필터 설정을 작성
 jwt:
   issuer: syh712@gmail.com
   secret_key: study-springboot

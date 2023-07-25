@@ -5,12 +5,12 @@ if (deleteButton) {
     deleteButton.addEventListener('click', event => {
         let id = document.getElementById('article-id').value;
         function success() {
-            alert('삭제가 완료되었습니다.');
+            alert('削除が完了しました。');
             location.replace('/articles');
         }
 
         function fail() {
-            alert('삭제 실패했습니다.');
+            alert('削除に失敗しました。');
             location.replace('/articles');
         }
 
@@ -32,18 +32,19 @@ if (modifyButton) {
         })
 
         function success() {
-            alert('수정 완료되었습니다.');
+            alert('修正が完了しました。');
             location.replace(`/articles/${id}`);
         }
 
         function fail() {
-            alert('수정 실패했습니다.');
+            alert('修正に失敗しました。');
             location.replace(`/articles/${id}`);
         }
 
         httpRequest('PUT',`/api/articles/${id}`, body, success, fail);
     });
 }
+
 
 // 생성 기능
 const createButton = document.getElementById('create-btn');
@@ -56,18 +57,17 @@ if (createButton) {
             content: document.getElementById('content').value
         });
         function success() {
-            alert('등록 완료되었습니다.');
+            alert('登録が完了しました。');
             location.replace('/articles');
         };
         function fail() {
-            alert('등록 실패했습니다.');
+            alert('登録に失敗しました。');
             location.replace('/articles');
         };
 
         httpRequest('POST','/api/articles', body, success, fail)
     });
 }
-
 
 // 쿠키를 가져오는 함수
 function getCookie(key) {

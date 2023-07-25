@@ -19,19 +19,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 1위는 금메달, 2위는 은메달, 3위는 동메달을 표시합니다.
                 if (index === 0) {
-                  listItem.innerHTML = `<img src="/img/gold.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}점`;
+                  listItem.innerHTML = `<img src="/img/gold.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}占`;
                 } else if (index === 1) {
-                  listItem.innerHTML = `<img src="/img/silver.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}점`;
+                  listItem.innerHTML = `<img src="/img/silver.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}占`;
                 } else if (index === 2) {
-                  listItem.innerHTML = `<img src="/img/bronze.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}점`;
+                  listItem.innerHTML = `<img src="/img/bronze.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}占`;
                 } else {
-                  listItem.textContent = `${index + 1}. ${modifiedData3}점`;
+                  listItem.textContent = `${index + 1}. ${modifiedData3}占`;
                 }
 
         topPublishers.appendChild(listItem);
       });
     })
     .catch(error => {
-      console.error('데이터를 가져오는 중 오류가 발생했습니다.', error);
+      console.error('データの取得中にエラーが発生しました。', error);
     });
 });

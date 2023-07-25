@@ -29,11 +29,11 @@
 
   // 시간 설정
   function setTime() {
-    const hours = parseInt(prompt("시간을 입력하세요 (0~23)"));
-    const minutes = parseInt(prompt("분을 입력하세요 (0~59)"));
+    const hours = parseInt(prompt("時間を入力してください (0~23)"));
+    const minutes = parseInt(prompt("分を入力してください (0~59)"));
 
     if (isNaN(hours) || isNaN(minutes) || hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
-      alert("올바른 시간을 입력하세요.");
+      alert("正しい時間を入力してください。");
       return;
     }
 
@@ -48,7 +48,7 @@
     }
 
     if (remainingTime <= 0) {
-      alert("타이머 시간을 설정하세요.");
+      alert("タイマー時間を設定してください。");
       return;
     }
 
@@ -81,7 +81,7 @@
     if (remainingTime <= 0) {
       clearInterval(countdownTimer);
       timerState = TimerState.STOPPED;
-      alert("타이머가 종료되었습니다.");
+      alert("タイマーが終了しました。");
     }
 
     updateCountdownDisplay();

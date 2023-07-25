@@ -19,6 +19,8 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.swing.*;
+
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @RequiredArgsConstructor
@@ -72,7 +74,14 @@ public class WebOAuthSecurityConfig {
                 .defaultAuthenticationEntryPointFor(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
                         new AntPathRequestMatcher("/api/**"));
 
-
+        /*2023.06.21. by commonerd : 스마트에디터 적용시 Spring Security가 X-Frame-Options Click jacking 공격을 막음
+                                   이를 SAMEORIGIN을 이용해 풀기 */
+        // >>>>> 100
+        http
+                // ...
+                .headers()
+                .frameOptions().sameOrigin();
+        // <<<<< 100
         return http.build();
     }
 

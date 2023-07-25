@@ -330,12 +330,12 @@
      * HTML5 DragAndDrop으로 사진을 추가하고, 확인버튼을 누른 경우에 동작한다.
      * @return
      */
-    function html5Upload() {
+    function html5Upload() {	
     	var tempFile,
     		sUploadURL;
-
-    	sUploadURL= '/smarteditorMultiImageUpload'; //upload URL
-
+    	
+    	sUploadURL= '/smarteditorMultiImageUpload'; 	//upload URL
+    	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
     		tempFile = htImageInfo['img'+j];
@@ -348,7 +348,7 @@
 	    	}catch(e){}
     		tempFile = null;
     	}
-	}
+	}	
     
     function callAjaxForHTML5 (tempFile, sUploadURL){
     	var oAjax = jindo.$Ajax(sUploadURL, {
@@ -611,8 +611,7 @@
  		req.open(opt.method.toUpperCase(), url, opt.async);
  		if (opt.sendheader) {
  			if(!this._headers["Content-Type"]){
-                    req.setRequestHeader("Content-Type", "file/unknown; charset=utf-8");
-
+ 				req.setRequestHeader("Content-Type", "file/unknown; charset=utf-8");
  			}
  			req.setRequestHeader("charset", "utf-8");
  			for (var x in this._headers) {

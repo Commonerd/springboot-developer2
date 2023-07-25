@@ -45,6 +45,19 @@ if (modifyButton) {
     });
 }
 
+// 스마트에디터 불러오기
+    let oEditors = []
+    smartEditor = function() {
+      console.log("Naver SmartEditor")
+      nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors,
+        elPlaceHolder: "editorTxt",
+        sSkinURI: "/smarteditor/SmartEditor2Skin.html",
+        fCreator: "createSEditor2"
+      })
+    }
+document.addEventListener('DOMContentLoaded', function() {
+smartEditor();
 // 생성 기능
 const createButton = document.getElementById('create-btn');
 
@@ -53,8 +66,10 @@ if (createButton) {
     createButton.addEventListener('click', event => {
         body = JSON.stringify({
             title: document.getElementById('title').value,
-            content: document.getElementById('content').value
+            /*content: document.getElementById('content').value*/
+            content: oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
         });
+        debugger;
         function success() {
             alert('등록 완료되었습니다.');
             location.replace('/articles');
@@ -67,7 +82,7 @@ if (createButton) {
         httpRequest('POST','/api/articles', body, success, fail)
     });
 }
-
+});
 
 // 쿠키를 가져오는 함수
 function getCookie(key) {
