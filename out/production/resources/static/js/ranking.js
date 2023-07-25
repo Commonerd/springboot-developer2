@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 1위는 금메달, 2위는 은메달, 3위는 동메달을 표시합니다.
                 if (index === 0) {
-                  listItem.innerHTML = `<img src="/img/gold.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}占`;
+                  listItem.innerHTML = `<img src="/img/gold.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}点`;
                 } else if (index === 1) {
-                  listItem.innerHTML = `<img src="/img/silver.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}占`;
+                  listItem.innerHTML = `<img src="/img/silver.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}点`;
                 } else if (index === 2) {
-                  listItem.innerHTML = `<img src="/img/bronze.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}占`;
+                  listItem.innerHTML = `<img src="/img/bronze.png" class="medal" style="width: 15px;"> ${index + 1}. ${modifiedData3}点`;
                 } else {
-                  listItem.textContent = `${index + 1}. ${modifiedData3}占`;
+                  listItem.textContent = `${index + 1}. ${modifiedData3}点`;
                 }
 
         topPublishers.appendChild(listItem);
