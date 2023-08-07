@@ -4,6 +4,7 @@ const deleteButton = document.getElementById('delete-btn');
 if (deleteButton) {
     deleteButton.addEventListener('click', event => {
         let id = document.getElementById('article-id').value;
+
         function success() {
             alert('削除が完了しました。');
             location.replace('/articles');
@@ -14,7 +15,7 @@ if (deleteButton) {
             location.replace('/articles');
         }
 
-        httpRequest('DELETE',`/api/articles/${id}`, null, success, fail);
+        httpRequest('DELETE', `/api/articles/${id}`, null, success, fail);
     });
 }
 
@@ -41,7 +42,7 @@ if (modifyButton) {
             location.replace(`/articles/${id}`);
         }
 
-        httpRequest('PUT',`/api/articles/${id}`, body, success, fail);
+        httpRequest('PUT', `/api/articles/${id}`, body, success, fail);
     });
 }
 
@@ -56,16 +57,18 @@ if (createButton) {
             title: document.getElementById('title').value,
             content: document.getElementById('content').value
         });
+
         function success() {
             alert('登録が完了しました。');
             location.replace('/articles');
         };
+
         function fail() {
             alert('登録に失敗しました。');
             location.replace('/articles');
         };
 
-        httpRequest('POST','/api/articles', body, success, fail)
+        httpRequest('POST', '/api/articles', body, success, fail)
     });
 }
 
@@ -73,7 +76,7 @@ if (createButton) {
 function getCookie(key) {
     var result = null;
     var cookie = document.cookie.split(';');
-    cookie.some(function (item) {
+    cookie.some(function(item) {
         item = item.replace(' ', '');
 
         var dic = item.split('=');
@@ -103,15 +106,15 @@ function httpRequest(method, url, body, success, fail) {
         const refresh_token = getCookie('refresh_token');
         if (response.status === 401 && refresh_token) {
             fetch('/api/token', {
-                method: 'POST',
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    refreshToken: getCookie('refresh_token'),
-                }),
-            })
+                    method: 'POST',
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        refreshToken: getCookie('refresh_token'),
+                    }),
+                })
                 .then(res => {
                     if (res.ok) {
                         return res.json();
@@ -130,28 +133,28 @@ function httpRequest(method, url, body, success, fail) {
 
 
 window.onload = function() {
-      getRankings();
-    };
+    getRankings();
+};
 
-    function getRankings() {
-    debugger;
-      // 랭킹을 가져오기 위해 Ajax 요청 보내기
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "/rankings");
-      xhr.onload = function() {
+function getRankings() {
+
+    // 랭킹을 가져오기 위해 Ajax 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/rankings");
+    xhr.onload = function() {
         if (xhr.status === 200) {
-          // 화면에 랭킹 표시하기
-          var data = xhr.responseText;
-          data = data.replace(/<[^>]*>/g, "");
-          for (var i = 0; i < data.length; i++) {
-            var ranking = data[i];
-            var li = document.createElement("li");
-            li.innerHTML = `${ranking.author} : ${ranking.score}`;
-            $("#ranking-list").append(li);
-          }
+            // 화면에 랭킹 표시하기
+            var data = xhr.responseText;
+            data = data.replace(/<[^>]*>/g, "");
+            for (var i = 0; i < data.length; i++) {
+                var ranking = data[i];
+                var li = document.createElement("li");
+                li.innerHTML = `${ranking.author} : ${ranking.score}`;
+                $("#ranking-list").append(li);
+            }
         } else {
-          console.log("Error: " + xhr.status);
+            console.log("Error: " + xhr.status);
         }
-      };
-      xhr.send();
-    }
+    };
+    xhr.send();
+}

@@ -40,7 +40,7 @@ public class Article {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Article(String author, String title, String content) {
+    public Article(Long articleId, String author, String title, String content) {
         this.author = author;
         this.title = title;
         this.content = content;

@@ -31,6 +31,14 @@
     .article-section .card {
       margin-bottom: 20px;
     }
+    .follow-btn {
+    margin-right: 5px;
+    margin-left: 15px;
+  }
+
+  .unfollow-btn {
+    margin-left: 5px;
+  }
 
     .btn-section {
       margin-top: 10px;
@@ -73,7 +81,7 @@
 <body>
 <div class="main-section">
   <h1>ミラクルモーニング</h1>
-  <h4>人生の変化は明け方に行われる。</h4>
+  <h4>人生の変化は明け方に起きる。</h4>
 </div>
 
 <div class="container">
@@ -85,6 +93,11 @@
           <header class="mb-2">
             <div class="card-header" th:text="${article.title}"></div>
             <div class="text-muted fst-italic mt-4 ml-4" th:text="|Posted on ${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')} By ${article.author}|"></div>
+            <!-- 23.07.27. by commonerd 팔로우 추가/언팔로우 버튼 추가 -->
+            <hr>
+            <button type="button" class="btn btn-secondary follow-btn" onclick="addFollow(this)" th:attr="data-item-id=${article.id}">フォロー</button>
+            <button type="button" class="btn btn-secondary unfollow-btn" onclick="deleteFollow(this)" th:attr="data-item-id=${article.id}">アンフォロー</button>
+
           </header>
           <hr>
           <section class="mb-2">
@@ -94,7 +107,7 @@
           </section>
         </div>
         <div class="btn-section">
-          <button type="button" id="modify-btn" th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|" class="btn btn-primary btn-sm">修整</button>
+          <button type="button" id="modify-btn" th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|" class="btn btn-primary btn-sm">修正</button>
           <button type="button" id="delete-btn" class="btn btn-secondary btn-sm">削除</button>
           <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/articles'">戻る</button>
         </div>
@@ -104,6 +117,7 @@
 </div>
 
 <script src="/js/article.js"></script>
+<script src="/js/follow.js"></script>
 </body>
 
 </html>

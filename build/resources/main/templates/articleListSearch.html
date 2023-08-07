@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>변화의 새벽, 미라클 모닝</title>
+  <title>変化の夜明け、ミラクルモーニング</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <style>
     .container {
@@ -88,8 +88,8 @@
 
 <body>
 <div class="main-section">
-  <h1>미라클 모닝</h1>
-  <h4>인생의 변화는 새벽녘에 이루어진다.</h4>
+  <h1>ミラクルモーニング</h1>
+  <h4>人生の変化は明け方に行われる</h4>
 </div>
 
 
@@ -99,11 +99,11 @@
       <span id="current-time"></span>
     </div>
     <button type="button" id="create-btn" th:onclick="|location.href='@{/new-article}'|"
-            class="btn btn-primary">글 등록</button>
-    <button type="button" class="btn btn-primary" onclick="location.href='/logout'">로그아웃</button>
+            class="btn btn-primary">登録</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='/logout'">ログアウト</button>
   </div>
   <div class="search-title">
-    <h2>검색 결과</h2>
+    <h2>検索結果</h2>
   </div>
   <div class="search-results" th:if="${pagedArticles != null}">
     <div class="col-md-4" th:each="item : ${pagedArticles}">
@@ -114,15 +114,16 @@
           <hr>
           <p class="text-muted first-italic" th:text="|${#temporals.format(item.createdAt,'yyyy-MM-dd HH:mm')}|"></p>
           <p class="text-muted first-italic" th:text="|${item.author}|"></p>
+          <button type="button" class="btn btn-secondary" onclick="toggleFollowStatus(this)" th:attr="data-item-id=${item.id}">Follow</button>
           <hr>
-          <a th:href="@{/articles/{id}(id=${item.id})}" class="btn btn-dark">보러가기</a>
+          <a th:href="@{/articles/{id}(id=${item.id})}" class="btn btn-dark">見る</a>
 
         </div>
       </div>
     </div>
   </div>
   <div class="search-results" th:unless="${pagedArticles != null}">
-    <p>검색결과가 없습니다.</p>
+    <p>検索結果がありません。</p>
   </div>
 </div>
 
@@ -172,6 +173,8 @@
 
 
 <script src="/js/nowtime.js"></script>
+<script src="/js/ranking.js"></script>
+<script src="/js/follow.js"></script>
 </body>
 
 </html>

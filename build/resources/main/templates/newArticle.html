@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>변화의 새벽, 미라클 모닝</title>
+  <title>変化の夜明け、ミラクルモーニング</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
   <style>
@@ -116,8 +116,8 @@
 
 <body>
 <div class="main-section">
-  <h1>미라클 모닝</h1>
-  <h4>인생의 변화는 새벽녘에 이루어진다.</h4>
+  <h1>ミラクルモーニング</h1>
+  <h4>人生の変化は明け方に行われる</h4>
 </div>
 
 <div class="container">
@@ -128,15 +128,13 @@
           <input type="hidden" id="article-id" th:value="${article.id}">
 
           <header class="mb-4">
-            <input type="text" class="form-control" placeholder="미라클모닝 00회차" id="title"
+            <input type="text" class="form-control" placeholder="ミラクルモーニング 00回目" id="title"
                    th:value="${article.title}">
           </header>
           <section class="mb-5">
-                  <div id="smarteditor">
-                    <textarea name="content" class="form-control"
-                        placeholder="ex)&#10;한일(00:00~00:00)&#10;1. 독서(00분)&#10;2. 블로그 포스팅(00분)" id="editorTxt"
-                        th:text="${article.content}"></textarea>
-                  </div>
+                    <textarea class="form-control h-25" rows="10"
+                              placeholder="ex)&#10;完了したこと(00:00~00:00)&#10;1. 読書(00分)&#10;2. 運動(00分)" id="content"
+                              th:text="${article.content}"></textarea>
           </section>
           <div class="countdown-section">
             <div class="countdown-timer">
@@ -145,18 +143,18 @@
               <span id="countdown-seconds">00</span>
             </div>
             <div class="countdown-buttons">
-              <button type="button" id="set-time-btn" class="btn btn-secondary btn-sm">시간설정</button>
-              <button type="button" id="start-btn" class="btn btn-secondary btn-sm">시작</button>
-              <button type="button" id="pause-btn" class="btn btn-secondary btn-sm">일시정지</button>
-              <button type="button" id="stop-btn" class="btn btn-secondary btn-sm">중지</button>
+              <button type="button" id="set-time-btn" class="btn btn-secondary btn-sm">時間設定</button>
+              <button type="button" id="start-btn" class="btn btn-secondary btn-sm">始まり</button>
+              <button type="button" id="pause-btn" class="btn btn-secondary btn-sm">一時停止</button>
+              <button type="button" id="stop-btn" class="btn btn-secondary btn-sm">中止</button>
             </div>
           </div>
         </article>
       </div>
       <div class="btn-section">
-        <button th:if="${article.id} != null" type="button" id="modify-btn" class="btn btn-primary btn-sm">수정</button>
-        <button th:if="${article.id} == null" type="button" id="create-btn" class="btn btn-primary btn-sm">등록</button>
-        <button type="button" class="btn btn-secondary btn-sm ml-2" onclick="location.href='/articles'">돌아가기</button>
+        <button th:if="${article.id} != null" type="button" id="modify-btn" class="btn btn-primary btn-sm">修正</button>
+        <button th:if="${article.id} == null" type="button" id="create-btn" class="btn btn-primary btn-sm">登録</button>
+        <button type="button" class="btn btn-secondary btn-sm ml-2" onclick="location.href='/articles'">戻る</button>
       </div>
     </div>
   </div>
@@ -166,7 +164,7 @@
 
 <script src="/js/article.js"></script>
 <script src="/js/timer.js"></script>
-<script type="text/javascript" src="/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 
 
 
