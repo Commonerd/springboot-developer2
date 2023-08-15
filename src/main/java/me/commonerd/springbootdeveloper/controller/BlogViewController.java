@@ -6,6 +6,8 @@ import me.commonerd.springbootdeveloper.domain.Article;
 import me.commonerd.springbootdeveloper.dto.ArticleListViewResponse;
 import me.commonerd.springbootdeveloper.dto.ArticleViewResponse;
 import me.commonerd.springbootdeveloper.service.BlogService;
+import me.commonerd.springbootdeveloper.service.LikeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.awt.*;
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,6 +25,9 @@ import java.util.List;
 public class BlogViewController {
 
     private final BlogService blogService;
+
+    @Autowired
+    private final LikeService likeService;
 
    /*@GetMapping("/articles")
     public String getArticles(Model model) {
@@ -37,7 +43,10 @@ public class BlogViewController {
     @GetMapping("/articles")
     public String getArticles(@RequestParam(defaultValue = "0") int page, Model model) {
         Page<ArticleListViewResponse> pagedArticles = blogService.findPaginated(page, 9)
-                .map(ArticleListViewResponse::new);
+                .map(article -> {
+                    boolean liked = likeService.isLiked(article.getId(), article.getAuthor(), "syh712@gmail.com");
+                    return new ArticleListViewResponse(article, likeService.getLikeCount(article.getId()), liked);
+                });
         model.addAttribute("pagedArticles", pagedArticles);
 
         return "articleList";

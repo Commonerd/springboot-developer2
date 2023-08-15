@@ -20,6 +20,7 @@ spring:
             client-secret: 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
             scope:
               - email
+              - email
               - profile
     # 2023.06.21. by commonerd 스마트에디터 적용시 Spring Security가 X-Frame-Options Click jacking 공격을 막음
     #                                   이를 SAMEORIGIN을 이용해 풀기

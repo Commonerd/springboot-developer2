@@ -141,3 +141,8 @@ INSERT INTO follow (following_user_id, followed_user_id, created_at) VALUES ('sy
 INSERT INTO follow (following_user_id, followed_user_id, created_at) VALUES ('syh712@gmail.com', 'user15@gmail.com', NOW())
 INSERT INTO follow (following_user_id, followed_user_id, created_at) VALUES ('syh712@gmail.com', 'user16@gmail.com', NOW())
 INSERT INTO follow (following_user_id, followed_user_id, created_at) VALUES ('syh712@gmail.com', 'user17@gmail.com', NOW())
+INSERT INTO follow (following_user_id, followed_user_id, created_at) VALUES ('syh712@gmail.com', 'user17@gmail.com', NOW())
+INSERT INTO likes (article_id, created_at, user_id) VALUES (112, NOW(), 'user3@gmail.com')
+INSERT INTO likes (article_id, created_at, user_id) VALUES (112, NOW(), 'user4@gmail.com')
+INSERT INTO likes (article_id, created_at, user_id) VALUES (112, NOW(), 'user9@gmail.com')
+

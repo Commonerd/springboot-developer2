@@ -29,4 +29,8 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
     // 現在ログインしているユーザーのフォロワー一覧を照会
     @Query("SELECT f.following FROM Follow f WHERE f.followed = :userId")
     List<String> findFollowersByUserId(@Param("userId") String userId);
+
+    boolean existsByFollowingAndFollowed(String following, String followed);
+
+
 }
