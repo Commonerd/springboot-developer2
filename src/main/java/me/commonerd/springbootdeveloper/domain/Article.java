@@ -1,20 +1,19 @@
 package me.commonerd.springbootdeveloper.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@Data //2023.08.15. by commonerd : video upload
 public class Article {
 
     @Id
@@ -31,6 +30,13 @@ public class Article {
     @Column(name = "author", nullable = false)
     private String author;
 
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<VideoFile> videoFiles; // 비디오 파일 리스트
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<ImageFile> imageFiles; // 이미지 파일 리스트
+
+
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -40,14 +46,30 @@ public class Article {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Article(Long articleId, String author, String title, String content) {
+    public Article(Long articleId, String author, String title, String content, List<ImageFile> imageFiles) {
         this.author = author;
         this.title = title;
         this.content = content;
+        this.imageFiles = imageFiles;
+
     }
 
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
+
+
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", author='" + author + '\'' +
+                ", imageFiles=" + imageFiles +
+                // 다른 필드들도 추가할 수 있음
+                '}';
     }
 }

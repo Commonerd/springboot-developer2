@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>変化の夜明け、ミラクルモーニング</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     .main-section {
       background-color: beige;
@@ -75,10 +75,54 @@
     .col-lg-8 {
       max-width: 100%;
     }
+      .image-container {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .image-item {
+    max-width: 100%;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+    /* 추가된 스타일 */
+    #image-carousel {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      max-width: 60%; /* 캐러셀 전체 크기 설정 */
+      margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+    }
+      /* 추가된 스타일 */
+  .carousel {
+    max-width: 60%; /* 원하는 크기로 조절 */
+    margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+  }
+
+
+    .carousel-inner .carousel-item {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .carousel-inner .carousel-item.active {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    /* 이미지 스케일링을 위한 스타일 */
+    .carousel-inner .carousel-item img {
+      max-width: 100%; /* 이미지 최대 너비 설정 */
+      height: auto; /* 높이 자동 조절 */
+      display: block; /* 가운데 정렬을 위해 추가 */
+      margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+      width: auto; /* 이미지 너비 자동 조절 */
+    }
   </style>
 </head>
-
 <body>
+
+
 <div class="main-section">
   <h1>ミラクルモーニング</h1>
   <h4>人生の変化は明け方に起きる。</h4>
@@ -100,26 +144,72 @@
 
           </header>
           <hr>
+          <!-- 이미지 카루셀 -->
+          <div id="image-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+            <ol class="carousel-indicators">
+              <li th:each="imageFile, status : ${article.imageFiles}"
+                  th:data-target="image-carousel"
+                  th:data-slide-to="${status.index}"
+                  th:classappend="${status.first} ? 'active' : ''"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div th:each="imageFile, status : ${article.imageFiles}"
+                   class="carousel-item"
+                   th:classappend="${status.first} ? 'active' : ''">
+                <img class="d-block w-100 img-fluid" th:src="@{/article_img/} + ${imageFile.filename}" alt="Image">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#image-carousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#image-carousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
+
+
           <section class="mb-2">
             <div class="card-body">
               <p class="fs-5 mb-4" th:text="${article.content}"></p>
             </div>
           </section>
-        </div>
-        <div class="btn-section">
-          <button type="button" id="modify-btn" th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|" class="btn btn-primary btn-sm">修正</button>
-          <button type="button" id="delete-btn" class="btn btn-secondary btn-sm">削除</button>
-          <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/articles'">戻る</button>
+
         </div>
       </article>
+      <div class="btn-section">
+        <button type="button" id="modify-btn" th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|" class="btn btn-primary btn-sm">修正</button>
+        <button type="button" id="delete-btn" class="btn btn-secondary btn-sm">削除</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/articles'">戻る</button>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- Bootstrap의 JavaScript 파일 로드 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- 기존 JavaScript 파일 로드 -->
+<script>
+  $(document).ready(function() {
+    var indicators = $('.carousel-indicators li');
+    var carousel = $('#image-carousel');
+
+    carousel.on('slide.bs.carousel', function(event) {
+      var slideIndex = $(event.relatedTarget).index();
+      indicators.removeClass('active');
+      indicators.eq(slideIndex).addClass('active');
+    });
+  });
+</script>
 <script src="/js/article.js"></script>
 <script src="/js/follow.js"></script>
 <script src="/js/current-user.js"></script>
-<script src="/js/like.js"></script>
+
 </body>
 
 </html>

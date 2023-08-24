@@ -79,7 +79,7 @@ public class LikeControllerTest {
         context.setAuthentication(new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities()));
     }
 
-    @DisplayName("likeArticle: 좋아요 성공")
+    @DisplayName("likeArticle: いいね登録 成功")
     @Test
     public void likeArticle() throws Exception {
         // given
@@ -104,7 +104,7 @@ public class LikeControllerTest {
         result.andExpect(status().isOk());
     }
 
-    @DisplayName("cancelLikeArticle: 좋아요 취소 성공")
+    @DisplayName("cancelLikeArticle: いいねキャンセル 成功")
     @Test
     public void cancelLikeArticle() throws Exception {
         // given
@@ -119,7 +119,7 @@ public class LikeControllerTest {
         Principal principal = Mockito.mock(Principal.class);
         Mockito.when(principal.getName()).thenReturn(userId);
 
-        // 먼저 좋아요 추가
+        // まず いいね　登録
         mockMvc.perform(post("/likeArticle")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(likeRequest))

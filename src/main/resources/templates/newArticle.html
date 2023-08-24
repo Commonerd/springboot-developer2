@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>変化の夜明け、ミラクルモーニング</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <style>
     .main-section {
@@ -111,6 +111,42 @@
       .article-card .container {
         margin-top: 20px;
       }
+
+/* 선택된 파일 이름 스타일 변경 */
+.custom-file-input:lang(en)~.custom-file-label::after {
+    content: "파일 선택";
+}
+
+/* 선택된 파일 표시 스타일 변경 */
+.custom-file-input:focus~.custom-file-label,
+.custom-file-input~.custom-file-label {
+    border-color: #ccc;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* 호버 시 스타일 변경 */
+.custom-file-input:focus~.custom-file-label:hover,
+.custom-file-input~.custom-file-label:hover {
+    background-color: #e2e2e2;
+}
+
+/* 액티브 시 스타일 변경 */
+.custom-file-input:focus~.custom-file-label:active,
+.custom-file-input~.custom-file-label:active {
+    border-color: #ccc;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* 선택된 파일 이름 스타일 변경 */
+.custom-file-label::after {
+    content: "파일 선택";
+    background-color: #f5f5f5;
+    border-color: #ccc;
+    color: #333;
+}
+
   </style>
 </head>
 
@@ -136,6 +172,37 @@
                               placeholder="ex)&#10;完了したこと(00:00~00:00)&#10;1. 読書(00分)&#10;2. 運動(00分)" id="content"
                               th:text="${article.content}"></textarea>
           </section>
+
+
+<!--          <section class="mb-5">
+&lt;!&ndash;            <input type="file" name="videoFiles" multiple>&ndash;&gt;
+              <div class="custom-file mb-3">
+                  <input type="file" class="custom-file-input" id="imageFiles" name="imageFiles" multiple>
+                  <label class="custom-file-label" for="imageFiles">파일 선택</label>
+              </div>
+              &lt;!&ndash;<input type="file" name="imageFiles" multiple>&ndash;&gt;
+          </section>-->
+
+            <section class="mb-5">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile" name="imageFiles" multiple accept=".jpg, .jpeg, .png" max="3">
+                    <label class="custom-file-label" for="customFile">파일명(최대 3개)</label>
+                </div>
+            </section>
+
+          <!-- 이미 등록된 이미지 파일 리스트 표시 -->
+          <section class="mb-5">
+            <div class="image-list">
+              <div class="row">
+                <div class="col-md-3 image-container" th:each="imageFile : ${article.imageFiles}">
+                  <img class="image-item img-fluid" th:src="@{/article_img/} + ${imageFile.filename}" th:alt="${imageFile.filename}">
+<!--                  <p th:text="${imageFile.filename}"></p> &lt;!&ndash; 파일 이름 표시 &ndash;&gt;-->
+                  <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeImage(this)" th:attr="data-image-id=${imageFile.id}">삭제</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <div class="countdown-section">
             <div class="countdown-timer">
               <span id="countdown-hours">00</span>:
@@ -164,7 +231,7 @@
 
 <script src="/js/article.js"></script>
 <script src="/js/timer.js"></script>
-
+<script src="/js/select-file.js"></script>
 
 
 
