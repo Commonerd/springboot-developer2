@@ -1,4 +1,4 @@
-Application Name: Miracle Morning
+# Application Name: Miracle Morning
 
 ## 仕様書と機能追加過程
 - <font color="white">[早起きのWebアプリー機能追加（1）仕様書とスケジュール](https://note.com/songyh/n/ne22f8f456c40)</font>
