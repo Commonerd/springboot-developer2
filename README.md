@@ -1,10 +1,10 @@
 Application Name: Miracle Morning
 
 ## 仕様書と機能追加過程
-- [早起きのWebアプリー機能追加（1）仕様書とスケジュール](https://note.com/songyh/n/ne22f8f456c40)
-- [早起きのWebアプリー機能追加（2）「フォロー」機能（設計・実装・テスト)](https://note.com/songyh/n/n217fe01d6776)
-- [早起きのWebアプリー機能追加（3）「いいね」機能（設計・実装・テスト)](https://note.com/songyh/n/n217fe01d6776)
-- [早起きのWebアプリー機能追加（4）画像アプロード機能（設計・実装・テスト)](https://note.com/songyh/n/n05f5662c3a96)
+- <font color="white">[早起きのWebアプリー機能追加（1）仕様書とスケジュール](https://note.com/songyh/n/ne22f8f456c40)</font>
+- <font color="white">[早起きのWebアプリー機能追加（2）「フォロー」機能（設計・実装・テスト)](https://note.com/songyh/n/n217fe01d6776)</font>
+- <font color="white">[早起きのWebアプリー機能追加（3）「いいね」機能（設計・実装・テスト)](https://note.com/songyh/n/n217fe01d6776)</font>
+- <font color="white">[早起きのWebアプリー機能追加（4）画像アプロード機能（設計・実装・テスト)](https://note.com/songyh/n/n05f5662c3a96)</font>
 
 
 
