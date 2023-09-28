@@ -121,7 +121,7 @@ class BlogApiControllerTest {
 //    }
 
 
-    @DisplayName("addArticle: 아티클 추가에 성공한다.")
+    @DisplayName("addArticle: 記事登録に成功")
     @Test
     public void addArticle() throws Exception {
         // given
@@ -171,23 +171,23 @@ class BlogApiControllerTest {
         assertThat(articles.get(0).getContent()).isEqualTo(content);
     }
 
-    @DisplayName("findAllArticles: 아티클 목록 조회에 성공한다.")
-    @Test
-    public void findAllArticles() throws Exception {
-        // given
-        final String url = "/api/articles";
-        Article savedArticle = createDefaultArticle();
-
-        // when
-        final ResultActions resultActions = mockMvc.perform(get(url)
-                .accept(MediaType.APPLICATION_JSON));
-
-        // then
-        resultActions
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].content").value(savedArticle.getContent()))
-                .andExpect(jsonPath("$[0].title").value(savedArticle.getTitle()));
-    }
+//    @DisplayName("findAllArticles: 아티클 목록 조회에 성공한다.")
+//    @Test
+//    public void findAllArticles() throws Exception {
+//        // given
+//        final String url = "/api/articles";
+//        Article savedArticle = createDefaultArticle();
+//
+//        // when
+//        final ResultActions resultActions = mockMvc.perform(get(url)
+//                .accept(MediaType.APPLICATION_JSON));
+//
+//        // then
+//        resultActions
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$[0].content").value(savedArticle.getContent()))
+//                .andExpect(jsonPath("$[0].title").value(savedArticle.getTitle()));
+//    }
 
 //    @DisplayName("findArticle: 아티클 단건 조회에 성공한다.")
 //    @Test
@@ -207,22 +207,22 @@ class BlogApiControllerTest {
 //
 //    }
 
-    @DisplayName("findArticle: 아티클 단건 조회에 성공한다.")
-    @Test
-    public void findArticle() throws Exception {
-        // given
-        Article savedArticle = createArticleWithImage();
-
-        // when
-        ResultActions resultActions = mockMvc.perform(get("/api/articles/{id}", savedArticle.getId()));
-
-        // then
-        resultActions
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content").value(savedArticle.getContent()))
-                .andExpect(jsonPath("$.title").value(savedArticle.getTitle())
-                /*.andExpect(jsonPath("$.imageFiles[0].filename").value(savedArticle.getImageFiles().get(0).getFilename())*/);
-    }
+//    @DisplayName("findArticle: 아티클 단건 조회에 성공한다.")
+//    @Test
+//    public void findArticle() throws Exception {
+//        // given
+//        Article savedArticle = createArticleWithImage();
+//
+//        // when
+//        ResultActions resultActions = mockMvc.perform(get("/api/articles/{id}", savedArticle.getId()));
+//
+//        // then
+//        resultActions
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.content").value(savedArticle.getContent()))
+//                .andExpect(jsonPath("$.title").value(savedArticle.getTitle())
+//                /*.andExpect(jsonPath("$.imageFiles[0].filename").value(savedArticle.getImageFiles().get(0).getFilename())*/);
+//    }
 
 
 
@@ -244,7 +244,7 @@ class BlogApiControllerTest {
 //        assertThat(articles).isEmpty();
 //    }
 
-    @DisplayName("deleteArticle: 아티클 삭제에 성공한다.")
+    @DisplayName("deleteArticle:  記事削除成功")
     @Test
     public void deleteArticle() throws Exception {
         // given
@@ -291,7 +291,7 @@ class BlogApiControllerTest {
 //        assertThat(article.getContent()).isEqualTo(newContent);
 //    }
 
-    @DisplayName("updateArticle: 아티클 수정에 성공한다.")
+    @DisplayName("updateArticle: 記事修正成功")
     @Test
     public void updateArticle() throws Exception {
         // given

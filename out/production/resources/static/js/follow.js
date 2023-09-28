@@ -5,7 +5,7 @@
             body = JSON.stringify({});
 
             function success(response) {
-                alert(response);
+                alert("フォロー登録を成功しました。");
             };
 
             function fail(response) {
@@ -25,7 +25,7 @@
             body = JSON.stringify({});
 
             function success(response) {
-                alert(response);
+                alert("フォロー削除を成功しました。");
             };
 
             function fail(response) {

@@ -19,7 +19,6 @@ public class AddArticleRequest {
 
     private String title;
     private String content;
-//    private List<MultipartFile> videoFiles; // 비디오 파일 리스트
     private List<MultipartFile> imageFiles; // 이미지 파일 리스트
 
     public Article toEntity(String author) {
@@ -27,8 +26,6 @@ public class AddArticleRequest {
                 .title(title)
                 .content(content)
                 .author(author)
-                /*.videoFiles(videoFiles)*/
-                /*.imageFiles(imageFiles)*/
                 .build();
     }
 }

@@ -114,7 +114,7 @@
 
 /* 선택된 파일 이름 스타일 변경 */
 .custom-file-input:lang(en)~.custom-file-label::after {
-    content: "파일 선택";
+    content: "ファイル選択";
 }
 
 /* 선택된 파일 표시 스타일 변경 */
@@ -141,7 +141,7 @@
 
 /* 선택된 파일 이름 스타일 변경 */
 .custom-file-label::after {
-    content: "파일 선택";
+    content: "ファイル選択";
     background-color: #f5f5f5;
     border-color: #ccc;
     color: #333;
@@ -186,7 +186,7 @@
             <section class="mb-5">
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" id="customFile" name="imageFiles" multiple accept=".jpg, .jpeg, .png" max="3">
-                    <label class="custom-file-label" for="customFile">파일명(최대 3개)</label>
+                    <label class="custom-file-label" for="customFile">ファイル名(最大三つ)</label>
                 </div>
             </section>
 
@@ -197,7 +197,7 @@
                 <div class="col-md-3 image-container" th:each="imageFile : ${article.imageFiles}">
                   <img class="image-item img-fluid" th:src="@{/article_img/} + ${imageFile.filename}" th:alt="${imageFile.filename}">
 <!--                  <p th:text="${imageFile.filename}"></p> &lt;!&ndash; 파일 이름 표시 &ndash;&gt;-->
-                  <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeImage(this)" th:attr="data-image-id=${imageFile.id}">삭제</button>
+                  <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeImage(this)" th:attr="data-image-id=${imageFile.id}">削除</button>
                 </div>
               </div>
             </div>

@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Data //2023.08.15. by commonerd : video upload
+@Data
 public class Article {
 
     @Id
@@ -29,9 +30,6 @@ public class Article {
 
     @Column(name = "author", nullable = false)
     private String author;
-
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    private List<VideoFile> videoFiles; // 비디오 파일 리스트
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<ImageFile> imageFiles; // 이미지 파일 리스트

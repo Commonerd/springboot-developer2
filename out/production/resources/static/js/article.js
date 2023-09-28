@@ -121,24 +121,18 @@ debugger;
         // 이미지 파일 추가
         const imageFiles = document.querySelector('input[name="imageFiles"]').files;
 
-
-//        // 비디오 파일을 다른 키로 추가
-//        for (const videoFile of videoFiles) {
-//            formData.append('videoFiles[]', videoFile);
-//        }
-
         // 이미지 파일을 다른 키로 추가
         for (const imageFile of imageFiles) {
             formData.append('imageFiles[]', imageFile);
         }
 
         function success() {
-            alert('등록이 완료되었습니다.');
+            alert('登録が完了しました。');
             location.replace('/articles');
         }
 
         function fail() {
-            alert('등록에 실패하였습니다.');
+            alert('登録に失敗しました。');
             location.replace('/articles');
         }
 
@@ -153,6 +147,8 @@ debugger;
         method: method,
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+            //'Content-Type': 'multipart/form-data',
+
         },
         body: formData,
     }).then(response => {

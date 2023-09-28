@@ -36,6 +36,8 @@ public class BlogService {
 
     private final ImageRepository imageRepository;
 
+    private final LikeService likeService;
+
     // BlogService.java 안에서
     public Article save(AddArticleRequest request, String userName) throws Exception {
         Article article = request.toEntity(userName);
@@ -130,9 +132,20 @@ public class BlogService {
     //>>>>> 100
     public List<ArticleListViewResponse> searchArticles(String keyword) {
         //Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
-        return blogRepository.searchArticles(keyword);
+        // return blogRepository.searchArticles(keyword);
+        List<Article> articles = blogRepository.searchArticles(keyword);
+        List<ArticleListViewResponse> responseList = new ArrayList<>();
+
+        for (Article article : articles) {
+            int likeCount = likeService.getLikeCount(article.getId());
+            boolean liked = likeService.isLiked(article.getId(), article.getAuthor(), "syh712@gmail.com");
+            responseList.add(new ArticleListViewResponse(article, likeCount, liked));
+        }
+
+        return responseList;
     }
     //<<<<< 100
+
 
     public List<Object[]> findArticleRanking() {
         return blogRepository.findTop5Ranking();

@@ -3,7 +3,7 @@
     var fileNames = Array.from(files).map(file => file.name).join(', ');
     var nextSibling = e.target.nextElementSibling;
     if (files.length > 3) {
-      alert('3개 이하의 파일만 선택할 수 있습니다.');
+      alert('3つ以下のファイルしか選択できません。');
       e.target.value = '';
       nextSibling.innerText = '파일 선택...';
     } else {

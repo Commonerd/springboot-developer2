@@ -68,6 +68,13 @@
       margin-bottom: 20px;
     }
 
+      .btn-danger .liked::before {
+        content: "♡";
+    }
+    .btn-danger .unliked::before {
+        content: "♥";
+    }
+
     @media (max-width: 576px) {
       .main-section {
         padding: 20px;
@@ -116,6 +123,11 @@
           <p class="text-muted first-italic" th:text="|${item.author}|"></p>
           <hr>
           <a th:href="@{/articles/{id}(id=${item.id})}" class="btn btn-dark">見る</a>
+
+          <button class="btn btn-danger" th:id="'likeButton-' + ${item.id}" th:data-item-id="${item.id}" th:data-author="${item.author}" onclick="toggleLike(this)">
+            <span th:class="${item.liked ? 'liked' : 'unliked'}"></span>
+          </button>
+          <span th:id="'likeCount-' + ${item.id}" th:text="${item.likeCount}"></span>
 
         </div>
       </div>
@@ -175,6 +187,8 @@
 <script src="/js/ranking.js"></script>
 <script src="/js/follow.js"></script>
 <script src="/js/current-user.js"></script>
+<script src="/js/like.js"></script>
+
 </body>
 
 </html>

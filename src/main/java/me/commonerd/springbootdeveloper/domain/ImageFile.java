@@ -18,5 +18,4 @@ public class ImageFile {
     private String filename;
     private String contentType;
 
-    // 나머지 코드는 그대로 둡니다
 }

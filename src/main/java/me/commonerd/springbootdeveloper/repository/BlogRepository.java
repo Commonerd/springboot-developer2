@@ -1,7 +1,6 @@
 package me.commonerd.springbootdeveloper.repository;
 
 import me.commonerd.springbootdeveloper.domain.Article;
-import me.commonerd.springbootdeveloper.dto.ArticleListViewResponse;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +17,7 @@ public interface BlogRepository extends JpaRepository<Article, Long> {
             "WHERE (a.author LIKE %:keyword%) " +
             "OR (a.title LIKE %:keyword%) " +
             "OR (a.content LIKE %:keyword%)")
-    List<ArticleListViewResponse> searchArticles(@Param("keyword") String keyword); // @Param 추가해야 빈 생성됨
+    List<Article> searchArticles(@Param("keyword") String keyword); // @Param 추가해야 빈 생성됨
     //<<<<< 100
 
     @Query("SELECT a.author, count(*) FROM Article a GROUP BY author ORDER BY count(*) DESC LIMIT 5")
