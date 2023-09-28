@@ -21,5 +21,8 @@ Application Name: Miracle Morning
 - **認証方式:** JWT, OAuth2
 
 
+## 画面遷移図
+
+
 ![gamensenido](./gamensenido.png)
 
